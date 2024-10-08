@@ -15,7 +15,7 @@ export default function ImageCertifications(){
     
     useEffect(()=>{
             const getIDs = async() =>{
-                const response = await fetch("http://localhost:3000/api/certifications")
+                const response = await fetch("/api/certifications")
 
                 if (response.ok){
                     const data = await response.json();
