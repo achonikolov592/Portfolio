@@ -9,6 +9,7 @@ if (!conn) {
     host: process.env.NEXT_PUBLIC_POSTGRES_HOST,
     port: parseInt(<string>process.env.NEXT_PUBLIC_POSTGRES_PORT, 10) || 5432,
     database: process.env.NEXT_PUBLIC_POSTGRES_DATABASE,
+    ssl: true
   });
 }
 
