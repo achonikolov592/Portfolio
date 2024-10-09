@@ -21,6 +21,7 @@ const ImageLanguage = async () => {
                 width: 150,
                 height: 150,
             });
+            console.log("Generated URL:", url);
             return url; // Return the generated URL
         })
     );
