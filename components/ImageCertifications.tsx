@@ -1,6 +1,7 @@
 'use client'
 import {pinata} from "@/utils/pinata"
 import { useEffect, useState } from 'react';
+import getRows from "@/utils/getRows";
 
 export default function ImageCertifications(){
     const [certificatesInfo, setCertificatesInfo] = useState<{name:string, description:string, url:string, date:Date}[]>([]);
@@ -15,11 +16,9 @@ export default function ImageCertifications(){
     
     useEffect(()=>{
             const getIDs = async() =>{
-                const response = await fetch("/api/certifications")
+                const data = await getRows("Certifications");
 
-                if (response.ok){
-                    const data = await response.json();
-                    
+                if (data){
                     let arrOfCertificates: Array<{name:string, description:string, url:string, date:Date}> = []
                     for (let i = 0; i < data.length; i++){
                         let certificate:{name:string, description:string, url:string, date:Date} = {name:"", description:"",url:"", date:new Date(Date.now())}

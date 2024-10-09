@@ -1,6 +1,7 @@
 'use client'
 import {pinata} from "@/utils/pinata"
 import { useEffect, useState } from 'react';
+import getRows from "@/utils/getRows";
 
 export default function ImageLanguage(){
     const [imageSrc, setImageSrc] = useState<string[]>([]);
@@ -8,10 +9,9 @@ export default function ImageLanguage(){
     
     useEffect(()=>{
             const getIDs = async() =>{
-                const response = await fetch("/api/language")
-
-                if (response.ok){
-                    const data = await response.json();
+                const data = await getRows("Languages");
+                
+                if (data){
                     
                     let arrOfSRCs: Array<string> = []
 
@@ -28,7 +28,7 @@ export default function ImageLanguage(){
                     setImageSrc(arrOfSRCs)
 
                 }else{
-                    console.error("Failed to fetch")
+                    console.error("No response from the db")
                 }
             } 
 
