@@ -8,7 +8,7 @@ const ImageLanguage = async () =>{
 
     let imageSrc: string[] = []
     //useEffect(()=>{
-            const getIDs = async() =>{
+            //const getIDs = async() =>{
                 const data = await getRows("Languages");
 
                 if (data){
@@ -30,9 +30,9 @@ const ImageLanguage = async () =>{
                 }else{
                     console.error("No response from the db")
                 }
-            } 
+           // } 
 
-            await getIDs();
+            //await getIDs();
         //}
         //, []);
     return (

@@ -16,7 +16,7 @@ const ImageCertifications = async () => {
     let certificatesInfo:{name:string, description:string, url:string, date:Date}[] = []
 
     //useEffect(()=>{
-            const getIDs = async() =>{
+            //const getIDs = async() =>{
                 const data = await getRows("Certifications");
 
                 if (data){
@@ -44,9 +44,9 @@ const ImageCertifications = async () => {
                 }else{
                     console.error("Failed to fetch")
                 }
-            } 
+            //} 
 
-            await getIDs();
+            //await getIDs();
         //}
         //, []);
     return (
