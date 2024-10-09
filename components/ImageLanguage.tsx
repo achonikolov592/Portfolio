@@ -9,8 +9,8 @@ export default function ImageLanguage(){
     
     useEffect(()=>{
             const getIDs = async() =>{
-                const data = await getRows("Languages");
-                
+                const data = await getRows('"Portfolio"."Languages"');
+
                 if (data){
                     
                     let arrOfSRCs: Array<string> = []
