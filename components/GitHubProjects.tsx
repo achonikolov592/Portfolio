@@ -21,7 +21,6 @@ const GitHubProjects = () => {
             
             if (response.ok){
                 const projectsInGithub = await response.json();
-                console.log(projectsInGithub);
                 let projectsToReturn:{name:string, description: string, url:string}[] = []
                 for (const project of projectsInGithub) {
                     projectsToReturn = [...projectsToReturn, {name:project.name, description:project.description, url:project.html_url}]

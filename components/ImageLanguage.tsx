@@ -1,32 +1,40 @@
-import { pinata } from "@/utils/pinata"; // Import Pinata utilities
-import getRows from "@/utils/getRows"; // Import your database access function
+'use client'
+import {pinata} from "@/utils/pinata"
+import { useEffect, useState } from 'react';
+import getRows from "@/utils/getRows";
 
-const ImageLanguage = async () => {
-    // Fetch data from the database directly
-    const data = await getRows("Languages");
+export default function ImageLanguage(){
+    const [imageSrc, setImageSrc] = useState<string[]>([]);
 
-    // Check if data is available
-    if (!data) {
-        console.error("No response from the database");
-        return <div>No data available</div>; // Handle the case of no data
-    }
+    
+    useEffect(()=>{
+            const getIDs = async() =>{
+                const data = await getRows("Languages");
+                
+                if (data){
+                    
+                    let arrOfSRCs: Array<string> = []
 
-    // Map through the data to create signed URLs
-    const imageSrc = await Promise.all(
-        data.map(async (item) => {
-            const url = await pinata.gateways.createSignedURL({
-                cid: item.cid,
-                expires: 30,
-            }).optimizeImage({
-                width: 150,
-                height: 150,
-            });
-            console.log("Generated URL:", url);
-            return url; // Return the generated URL
-        })
-    );
+                    for (let i = 0; i < data.length; i++){
+                        const ids = await pinata.gateways.createSignedURL({
+                            cid: data[i].cid,
+                            expires: 30,
+                            }).optimizeImage({
+                                width:150,
+                                height:150
+                            })
+                        arrOfSRCs = [...arrOfSRCs, ids]
+                    }
+                    setImageSrc(arrOfSRCs)
 
-    // Return the JSX to render images
+                }else{
+                    console.error("No response from the db")
+                }
+            } 
+
+            getIDs();
+        }
+        , []);
     return (
         <div className="inline-block mt-10">
             <div className="grid grid-cols-3 gap-4">
@@ -36,6 +44,4 @@ const ImageLanguage = async () => {
             </div>
         </div>
     );
-};
-
-export default ImageLanguage;
+}

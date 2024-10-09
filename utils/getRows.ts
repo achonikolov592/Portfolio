@@ -1,3 +1,4 @@
+'use server'
 import conn from "./db";
 
 export default async function getRows(table: string){
