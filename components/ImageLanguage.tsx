@@ -1,13 +1,13 @@
 
 import {pinata} from "@/utils/pinata"
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import getRows from "@/utils/getRows";
 
-export default function ImageLanguage(){
-    const [imageSrc, setImageSrc] = useState<string[]>([]);
+const ImageLanguage = async () =>{
+    //const [imageSrc, setImageSrc] = useState<string[]>([]);
 
-    
-    useEffect(()=>{
+    let imageSrc: string[] = []
+    //useEffect(()=>{
             const getIDs = async() =>{
                 const data = await getRows('"Portfolio"."Languages"');
 
@@ -25,16 +25,16 @@ export default function ImageLanguage(){
                             })
                         arrOfSRCs = [...arrOfSRCs, ids]
                     }
-                    setImageSrc(arrOfSRCs)
+                    imageSrc = arrOfSRCs
 
                 }else{
                     console.error("No response from the db")
                 }
             } 
 
-            getIDs();
-        }
-        , []);
+            await getIDs();
+        //}
+        //, []);
     return (
         <div className="inline-block mt-10">
             <div className="grid grid-cols-3 gap-4">
@@ -45,3 +45,5 @@ export default function ImageLanguage(){
         </div>
     );
 }
+
+export default  ImageLanguage;

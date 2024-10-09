@@ -2,18 +2,20 @@ import {pinata} from "@/utils/pinata"
 import { useEffect, useState } from 'react';
 import getRows from "@/utils/getRows";
 
-export default function ImageCertifications(){
-    const [certificatesInfo, setCertificatesInfo] = useState<{name:string, description:string, url:string, date:Date}[]>([]);
-    const [isExpanded, setIsExpanded] = useState<boolean[]>([]);
+const ImageCertifications = async () => {
+    //const [certificatesInfo, setCertificatesInfo] = useState<{name:string, description:string, url:string, date:Date}[]>([]);
+    //const [isExpanded, setIsExpanded] = useState<boolean[]>([]);
 
-    const toggleContent = (index:number) => {
+    /*const toggleContent = (index:number) => {
 
         setIsExpanded(prevState => 
             prevState.map((element, i) => (i === index ? !element : element))
         );
-    };
+    };*/
     
-    useEffect(()=>{
+    let certificatesInfo:{name:string, description:string, url:string, date:Date}[] = []
+
+    //useEffect(()=>{
             const getIDs = async() =>{
                 const data = await getRows('"Portfolio"."Certifications"');
 
@@ -36,17 +38,17 @@ export default function ImageCertifications(){
 
                         arrOfCertificates = [...arrOfCertificates, certificate]
                     }
-                    setCertificatesInfo(arrOfCertificates)
-                    setIsExpanded(Array(arrOfCertificates.length).fill(false));
+                    certificatesInfo = arrOfCertificates
+                    //setIsExpanded(Array(arrOfCertificates.length).fill(false));
 
                 }else{
                     console.error("Failed to fetch")
                 }
             } 
 
-            getIDs();
-        }
-        , []);
+            await getIDs();
+        //}
+        //, []);
     return (
         <div className="grid grid-cols-2 gap-1 w-3/4">
                 {certificatesInfo.map((value, index) => (
@@ -57,17 +59,12 @@ export default function ImageCertifications(){
                         <div className="flex flex-col">
                             <p className="text-violet-600">{value.name}</p>
                             <p>Date recieved: {value.date.toDateString()}</p>
-                            {isExpanded[index] && (
+                            
                                 <div className="mt-2 w-72">
                                     <p>{value.description}</p>
                                 </div>
-                            )}
-                            <button
-                                onClick={()=>{toggleContent(index)}}
-                                className="mt-2 text-violet-600 underline"
-                            >
-                                {isExpanded[index] ? 'Show Less' : 'Show More'}
-                            </button>
+                            
+                            
                         </div>
                     </div>
                     
@@ -76,3 +73,5 @@ export default function ImageCertifications(){
         </div>
     );
 }
+
+export default ImageCertifications;
