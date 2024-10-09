@@ -1,4 +1,3 @@
-'use client'
 import {pinata} from "@/utils/pinata"
 import { useEffect, useState } from 'react';
 import getRows from "@/utils/getRows";
