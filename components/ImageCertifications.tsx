@@ -1,5 +1,4 @@
 import {pinata} from "@/utils/pinata"
-import { useEffect, useState } from 'react';
 import getRows from "@/utils/getRows";
 
 const ImageCertifications = async () => {
@@ -16,18 +15,15 @@ const ImageCertifications = async () => {
                     width: 150,
                     height: 150,
                 });
-    
-                // Construct the certificate object
                 return {
                     name: item.name,
                     description: item.description,
-                    url: url, // Set the generated URL
-                    date: new Date(item.date), // Parse the date
+                    url: url,
+                    date: new Date(item.date),
                 };
             })
         );
     
-        // Return the JSX to render the certificates
         return (
             <div className="grid grid-cols-2 gap-1 w-3/4">
                 {certificatesInfo.map((value, index) => (
