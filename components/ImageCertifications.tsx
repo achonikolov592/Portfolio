@@ -17,7 +17,7 @@ const ImageCertifications = async () => {
 
     //useEffect(()=>{
             const getIDs = async() =>{
-                const data = await getRows('"Portfolio"."Certifications"');
+                const data = await getRows("Certifications");
 
                 if (data){
                     let arrOfCertificates: Array<{name:string, description:string, url:string, date:Date}> = []

@@ -9,7 +9,7 @@ const ImageLanguage = async () =>{
     let imageSrc: string[] = []
     //useEffect(()=>{
             const getIDs = async() =>{
-                const data = await getRows('"Portfolio"."Languages"');
+                const data = await getRows("Languages");
 
                 if (data){
                     
