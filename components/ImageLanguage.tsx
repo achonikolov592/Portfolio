@@ -5,36 +5,35 @@ import getRows from "@/utils/getRows";
 
 export default function ImageLanguage(){
     const [imageSrc, setImageSrc] = useState<string[]>([]);
+    const [session, setSession] = useState(null)
 
     
     useEffect(()=>{
-            const getIDs = async() =>{
-                const data = await getRows("Languages");
-                
-                if (data){
-                    
-                    let arrOfSRCs: Array<string> = []
+        const getIDs = async() =>{
+            const data = await getRows("Languages");
+            if (data) {
+                let arrOfSRCs: Array<string> = [];
 
-                    for (let i = 0; i < data.length; i++){
-                        const ids = await pinata.gateways.createSignedURL({
-                            cid: data[i].cid,
-                            expires: 30,
-                            }).optimizeImage({
-                                width:150,
-                                height:150
-                            })
-                        arrOfSRCs = [...arrOfSRCs, ids]
-                    }
-                    setImageSrc(arrOfSRCs)
-
-                }else{
-                    console.error("No response from the db")
+                // Fetch images
+                for (let i = 0; i < data.length; i++) {
+                    const ids = await pinata.gateways.createSignedURL({
+                        cid: data[i].cid,
+                        expires: 30,
+                    }).optimizeImage({
+                        width: 150,
+                        height: 150,
+                    });
+                    arrOfSRCs.push(ids); // Use push for better performance
                 }
-            } 
+                setImageSrc(arrOfSRCs);
+            } else {
+                console.error("No response from the db");
+            }
+        }     
 
-            getIDs();
-        }
-        , []);
+        getIDs();
+    }
+    , []);
     return (
         <div className="inline-block mt-10">
             <div className="grid grid-cols-3 gap-4">

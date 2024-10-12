@@ -3,6 +3,7 @@ import {pinata} from "@/utils/pinata"
 import { useEffect, useState } from 'react';
 import getRows from "@/utils/getRows";
 
+
 export default function ImageCertifications(){
     const [certificatesInfo, setCertificatesInfo] = useState<{name:string, description:string, url:string, date:Date}[]>([]);
     const [isExpanded, setIsExpanded] = useState<boolean[]>([]);
@@ -16,6 +17,7 @@ export default function ImageCertifications(){
     
     useEffect(()=>{
             const getIDs = async() =>{
+
                 const data = await getRows("Certifications");
 
                 if (data){
@@ -46,6 +48,7 @@ export default function ImageCertifications(){
             } 
 
             getIDs();
+                
         }
         , []);
     return (

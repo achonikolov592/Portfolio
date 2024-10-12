@@ -3,9 +3,11 @@ import CalculateAge from "@/utils/calculateAge";
 import ImageLanguage from "@/components/ImageLanguage";
 import ImageCertifications from "@/components/ImageCertifications";
 import GitHubProjects from "@/components/GitHubProjects";
+
+
 export default function HomePage() {
   const Age: number|undefined = CalculateAge()
-
+  
   return (
     <div>
         <div id="bio" className="flex flex-col justify-center items-center">

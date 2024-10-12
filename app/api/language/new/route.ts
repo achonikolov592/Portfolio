@@ -9,7 +9,7 @@ export async function POST(request: Request) {
         return new Response(JSON.stringify(result), {status: 200})
     }catch(err){
         console.error('Error inserting data:', err);
-        return new Response("Failed", {status: 500})
+        return new Response(JSON.stringify({ message: "Invalid data" }), {status: 500})
     }
 }
 
@@ -22,6 +22,6 @@ export async function DELETE(request: Request) {
         return new Response(JSON.stringify(result), {status: 200})
     }catch(err){
         console.error('Error deleting data:', err);
-        return new Response("Failed", {status: 500})
+        return new Response(JSON.stringify({ message: "Invalid data" }), {status: 500})
     }
 }

@@ -9,6 +9,6 @@ export async function GET(request: Request) {
         return new Response(JSON.stringify(rowsOfResponse),{status:200})
     }
 
-    return new Response("Failed",{status:500})
+    return new Response(JSON.stringify({ message: "Failed" }),{status:500})
     
 }
